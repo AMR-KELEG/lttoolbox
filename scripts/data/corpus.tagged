@@ -1,0 +1,8 @@
+^a/a<n><compound-only-L>$
+^a/a<pr><compound-only-L>$
+^b/b<n><compound-R>$
+^b/b<pr><compound-R>$
+^c/d<compound-only-L><n>$ 
+^c/d<compound-only-L><pr>$
+^d/d<compound-R><n>$
+^d/d<compound-R><pr>$
