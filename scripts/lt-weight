@@ -1,2 +1,7 @@
 #! /bin/sh
+CORPUS=$2
+LINES=$(wc -l $CORPUS | cut -d ' ' -f1)
 
+cat $CORPUS | sed -e 's/[ \t]//' | sed -e 's/\^.*\///' |
+sed -e 's/\$$//' | sort | uniq -c | sed -e 's/^[ \t]*//' |
+awk -v lines="$LINES" '{$1=-log($1/lines); print $2":" $2 "::" $1}'
