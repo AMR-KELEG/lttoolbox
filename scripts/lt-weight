@@ -25,7 +25,7 @@ DISJUNCTED_ATTFST="$TEMP_DIR/weighted-transducer.att"
 # Convert the input FST to HFST
 lt-print $FST |
 sed -e 's/:/\\:/'|
-sed -e :a -e 's/ /\&#39;@_SPACE_@\&#39;/;ta'> $ATTFST
+sed -e :a -e 's/ /@_SPACE_@/;ta'> $ATTFST
 
 hfst-txt2fst --epsilon=ε -i $ATTFST -o $HFST_FST
 
