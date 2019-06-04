@@ -36,6 +36,5 @@ if __name__ == '__main__':
 	lines = list(pd.Series(lines).value_counts().reset_index().apply(lambda r: '{}::{}'.format(r['index'].strip(), -np.log(r[0]/len(lines))), axis=1))
 
 	with open(FILE_NAME, 'w') as f:
-		f.write('[?*]::1000000\n')
 		for line in lines:
 			f.write(line+'\n')
