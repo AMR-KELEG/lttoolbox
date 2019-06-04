@@ -20,7 +20,8 @@ WEIGHTED_FST="$TEMP_DIR/weighted-pairs.hfst"
 COMPOSED_FST="$TEMP_DIR/weighted-transducer.hfst"
 SUBTRACTED_FST="$TEMP_DIR/subtracted-transducer.hfst"
 DISJUNCTED_FST="$TEMP_DIR/disjuncted-weighted-transducer.hfst"
-DISJUNCTED_ATTFST="$TEMP_DIR/weighted-transducer.att"
+MINIMIZED_FST="$TEMP_DIR/minimized-weighted-transducer.hfst"
+MINIMIZED_ATTFST="$TEMP_DIR/weighted-transducer.att"
 
 # Convert the input FST to HFST
 lt-print $FST |
@@ -45,12 +46,13 @@ cat $WEIGHTED_REGEXP | hfst-regexp2fst -j -o $WEIGHTED_FST
 hfst-compose -1 $HFST_FST -2 $WEIGHTED_FST -v -o $COMPOSED_FST
 hfst-subtract $HFST_FST $COMPOSED_FST -o $SUBTRACTED_FST
 hfst-disjunct $SUBTRACTED_FST $COMPOSED_FST -o $DISJUNCTED_FST
-hfst-fst2txt -i $DISJUNCTED_FST -o $DISJUNCTED_ATTFST
+hfst-minimize $DISJUNCTED_FST -o $MINIMIZED_FST
+hfst-fst2txt -i $MINIMIZED_FST -o $MINIMIZED_ATTFST
 
 # Compile the FST back using lttoolbox
 lt-comp lr $DISJUNCTED_ATTFST $OUTPUT_FST
 
 # Delete the temporary files
-# rm -rf $TEMP_DIR
+rm -rf $TEMP_DIR
 
 # ./lt-weight ../../apertium-eng/eng.automorf.bin ../../apertium-eng/texts/eng.tagged efst.bin
